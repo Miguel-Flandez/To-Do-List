@@ -1,0 +1,150 @@
+*,:before,:after{
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+h1{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+    font-size: 50px;
+    min-width: 700px;
+    text-align: center;
+    color: tan;
+}
+
+
+#listContainer{
+    height: 70vh;
+    width: 95vw;
+    margin: auto;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    overflow-y: auto;
+}
+
+#addList{
+    border-color: none;
+    position: fixed;
+    width: 50px;
+    height: 50px;
+    bottom: 10px;
+    transition: transform 1.5s ease-in-out;
+}
+
+#addList:hover{
+    transform: scale(1.2);
+}
+
+
+.to-do-lists{
+    border: 1px solid tan;
+    width: 90px;
+    height: 160px;
+    padding:20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: tan;
+    font-weight: bold;
+}
+
+.to-do-lists:hover{
+    color:white;
+    background-color: tan;
+    border-color: tan;
+}
+
+
+#popupModal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+#popupModalContent {
+    background-color: white;
+    padding: 20px;
+    border-radius: 20px;
+    border: 10px solid tan;
+    color: tan;
+}
+
+#popupModal input {
+    width: 200px;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid tan;
+    color: tan;
+
+}
+
+#popupModal button {
+    padding: 10px;
+    color: tan;
+    background-color: white;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+#popupModal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+#popupModal2 {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    justify-content: center;
+    align-items: center;
+}
+#popupModalContent2 {
+    background-color: white;
+    height: 80%;
+    width: 95%;
+    padding: 20px;
+    border-radius: 20px;
+    border: 10px solid tan;
+    color: tan;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+#titleHolder{
+    overflow-y: hidden;
+}
+.noteTitle{
+    color: tan;
+    font-weight: bold;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 50px;
+    margin-top: -40px;
+}
+#note{
+    width:100%;
+    height:100%;
+    overflow-y: auto;
+    color: tan;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 20px;
+}
