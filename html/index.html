@@ -11,19 +11,32 @@
     <div id="listContainer">
        
     </div>
-    <div id="popupModal">
-        <div id="popupModalContent">
+    <div id="addModal">
+        <div id="addModalContent">
             <h3>Enter To-Do Title</h3>
             <input type="text" id="todoTitleInput" placeholder="Enter title here" />
             <button id="submitButton">Add</button>
         </div>
     </div>
 
-    <div id="popupModal2">
-        <div id="popupModalContent2">
+    <div id="noteModal">
+        <div id="noteModalContent">
             <div id="titleHolder"></div>
             <div id="noteHolder"></div>
-            <button type="button" id="saveNote">Save</button>
+            <div id="buttonHolder">
+                <button type="button" id="addTodo">Add</button>
+                <button type="button" id="saveNote">Save</button>
+                <button type="button" id="deleteNote">Delete</button>
+            </div>
+
+    <div id="deleteModal">
+        <div id="deleteModalContent">
+            <h3 id="deleteModalConfirmMessage">Are you sure about that?</h3>
+            <button type="button" id="deleteYes">Yes</button>
+            <button type="button" id="deleteNo">No</button>
+        </div>
+    </div>
+            
                 
             
         </div>

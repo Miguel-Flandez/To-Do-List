@@ -1,23 +1,33 @@
 const addButton = document.getElementById("addList");
+
 const listContainer = document.getElementById("listContainer")
 
-const popupModal = document.getElementById("popupModal");
+const addModal = document.getElementById("addModal");
 const todoTitleInput = document.getElementById("todoTitleInput");
 const submitButton = document.getElementById("submitButton");
 
-const popupModal2 = document.getElementById("popupModal2");
+const noteModal = document.getElementById("noteModal");
 const titleHolder = document.getElementById("titleHolder");
 const noteHolder = document.getElementById("noteHolder");
 
+const addTodo = document.getElementById('addTodo');
+const saveNote = document.getElementById('saveNote');
+const deleteNote = document.getElementById('deleteNote');
+
+const deleteModal = document.getElementById('deleteModal');
+const deleteYes = document.getElementById('deleteYes');
+const deleteNo = document.getElementById('deleteNo');
+
+window.onload = loadJSON;
 
 window.addEventListener("keydown",function(event){
-    if(event.key==="+"){
-        popupModal.style.display ="flex";
+    if(event.key==="="){
+        addModal.style.display ="flex";
     }
 })
 
 addButton.addEventListener('click',function(){
-    popupModal.style.display ="flex";
+    addModal.style.display ="flex";
     todoTitleInput.focus();
 });
 
@@ -26,7 +36,7 @@ function handleToSubmit(){
 
     if(newTodoTitle){
         addList(newTodoTitle);
-        popupModal.style.display = "none";
+        addModal.style.display = "none";
         todoTitleInput.value="";
     }else{
         alert("kupal ka")
@@ -44,9 +54,10 @@ todoTitleInput.addEventListener('keydown', function(event){
 
 const arr = [];
 
+
+
 function addList (title){
 const newTodo = document.createElement("div");
-
 
 arr.push({
     title:title,
@@ -64,85 +75,208 @@ newTodo.setAttribute('data-id',newIndex);
 
 listContainer.appendChild(newTodo);
 
-newTodo.addEventListener('click',function(){
-    const noteTitle = document.createElement('div');
+openNotes(newTodo);
+}
+
+function saveJSON(){
+    const arrString = JSON.stringify(arr);
+    localStorage.setItem('arr', arrString);
+}
+function loadJSON(){
+    const arrJSON = localStorage.getItem('arr');
     
-    const index = newTodo.getAttribute('data-id');
-    const todoData = arr[index];
 
-    titleHolder.innerHTML = '';
-    noteTitle.innerHTML = `<h3>${todoData.title}</h3>`;  
-    noteTitle.id = "noteTitle";
-
-    noteHolder.innerHTML = '';
-
-    const saveNote = document.getElementById('saveNote');
-
-    todoData['to-do'].forEach(element => {
-        const checkBox = document.createElement('input');
-        const note = document.createElement('input');
-
-        checkBox.id = 'checkBox';
-        checkBox.type = 'checkbox';
-        checkBox.checked = element.chk;
-
-        note.type = 'text';
-        note.id = 'note';
-        note.value = element.note;
-
-        noteHolder.appendChild(checkBox);
-        noteHolder.appendChild(note);
-
-        saveNote.addEventListener('click',function(){
-            element.note = note.value;
-            element.chk = checkBox.checked;
-            popupModal2.style.display = "none";
-        })
-    });
+    if(arrJSON){
+        const loadedArr = JSON.parse(arrJSON);
+        arr.push(...loadedArr);
+        renderList();
+    }
     
-    popupModal2.style.display = "flex";
+}
 
-    titleHolder.appendChild(noteTitle);
+function renderList(){
+    listContainer.innerHTML = '';
 
-    if(popupModal2.style.display==='flex'){
-        window.addEventListener('keydown',function(e){
+    arr.forEach((element, index)=>{
+        const newTodo = document.createElement('div');
+
+        newTodo.classList.add('to-do-lists');
+        newTodo.innerHTML = `<p>${element.title}</p>`;
+        newTodo.setAttribute('data-id',index);
+
+        listContainer.appendChild(newTodo);
+        if(element===0){
+            listContainer.removeChild(newTodo);
+        }
+        openNotes(newTodo);
+    })
+}
+
+function openNotes(newTodo){
+    newTodo.addEventListener('click',function(){
+
+        const tempArr = [];
+        const noteTitle = document.createElement('div');
+        
+        const index = newTodo.getAttribute('data-id');
+        const todoData = arr[index];
+    
+        titleHolder.innerHTML = '';
+        noteTitle.innerHTML = `<h3>${todoData.title}</h3>`;  
+        noteTitle.id = "noteTitle";
+    
+        noteHolder.innerHTML = '';
+    
+        todoData['to-do'].forEach((element) => {
+    
+            const noteWrapper = document.createElement('div');
+            const checkBox = document.createElement('input');
+            const note = document.createElement('input');
+            const deleteTodo = document.createElement('button')
+    
+            noteWrapper.id = `noteWrapper`
+    
+            checkBox.id = 'checkbox';
+            checkBox.type = 'checkbox';
+            checkBox.checked = element.chk;
+    
+            note.type = 'text';
+            note.id = 'note';
+            note.value = element.note;
+    
+            deleteTodo.id = 'deleteTodo';
+            deleteTodo.innerHTML = '❌';
+    
+            noteHolder.appendChild(noteWrapper);
+            noteWrapper.appendChild(checkBox);
+            noteWrapper.appendChild(note);
+            noteWrapper.appendChild(deleteTodo);
+    
+            deleteTodo.onclick = function(){
+                const deleteIndex = todoData['to-do'].indexOf(element);
+    
+                todoData['to-do'].splice(deleteIndex, 1);
+                noteHolder.removeChild(noteWrapper);
+            }
+    
+            saveNote.addEventListener('click',function(){
+                element.note = note.value;
+                element.chk = checkBox.checked;
+                noteModal.style.display = "none";
+                saveJSON();
+    
+            })
+        });
+    
+        noteModal.style.display = "flex";
+    
+        titleHolder.appendChild(noteTitle);
+    
+        addTodo.onclick = addNote;
+    
+        document.onkeydown = function(e){
             if(e.key==='Enter'){
+                addNote();
+            }
+        }
+    
+    
+        function addNote(){
+    
+            if(document.activeElement.tagName.toLowerCase()==='input'&& document.activeElement.type==='text'&&document.activeElement.value!==''){
+    
+            
+                const noteWrapper = document.createElement('div');
                 const checkBox = document.createElement('input');
                 const note = document.createElement('input');
-
-                checkBox.id = 'checkBox';
+                const deleteTodo = document.createElement('button');
+                
+                noteWrapper.id = `noteWrapper`;
+    
+                checkBox.id = 'checkbox';
                 checkBox.type = 'checkbox';
                 checkBox.checked = false;
-
+    
                 note.type = 'text';
                 note.id = 'note';
                 note.value = '';
-
-                noteHolder.appendChild(checkBox);
-                noteHolder.appendChild(note);
-
-                todoData['to-do'].push({
+    
+                deleteTodo.id = 'deleteTodo';
+                deleteTodo.innerHTML = '❌';
+    
+                noteHolder.appendChild(noteWrapper);
+                noteWrapper.appendChild(checkBox);
+                noteWrapper.appendChild(note);
+                noteWrapper.appendChild(deleteTodo);
+    
+                note.focus();
+    
+                const newItems = {
                     chk: checkBox.checked,
                     note: note.value
+                }
+                tempArr.push(newItems);
+    
+                checkBox.addEventListener('change', function(){
+                    newItems.chk = checkBox.checked;
                 })
+    
+                note.addEventListener('input',function(){
+                    newItems.note = note.value;
+                })
+                
+                deleteTodo.onclick = function(){
+                    const deleteIndex = tempArr.indexOf(newItems)
+    
+                    tempArr.splice(deleteIndex, 1);
+                    noteHolder.removeChild(noteWrapper);
+                }
             }
-        })
     }
-})
+    
+        saveNote.onclick = function(){
+            todoData['to-do'].push(...tempArr);
+            saveJSON();
+        }
+    
+        deleteNote.onclick = function(){
+            deleteModal.style.display = 'flex';
+        }
+        deleteYes.onclick = function(){
+            deleteModal.style.display = 'none';
+            noteModal.style.display = 'none';
+            arr.splice(index, 1, 0);
+            listContainer.removeChild(newTodo);
+            saveJSON();
+        }
+    })
 }
-popupModal.addEventListener('click', function(e) {
-    if (e.target === popupModal) {
-        popupModal.style.display = "none"; // Close modal when clicking outside
+addModal.addEventListener('click', function(e) {
+    if (e.target === addModal) {
+        addModal.style.display = "none"; // Close modal when clicking outside
     }
 })
+
+noteModal.addEventListener('click', function(e) {
+    if (e.target === noteModal) {
+        noteModal.style.display = "none"; // Close modal when clicking outside
+    }
+})
+
+deleteModal.addEventListener('click', function(e) {
+    if (e.target === deleteModal) {
+        deleteModal.style.display = "none"; // Close modal when clicking outside
+    }
+})
+deleteNo.addEventListener('click', function(){
+    deleteModal.style.display = 'none';
+})
+
 window.addEventListener('keydown', function(e) {
-    if (e.key === "Escape") {
-        popupModal.style.display = "none"; // Close modal when clicking outside
-        popupModal2.style.display = "none"; // Close modal when clicking outside
-    }
-})
-popupModal2.addEventListener('click', function(e) {
-    if (e.target === popupModal2) {
-        popupModal2.style.display = "none"; // Close modal when clicking outside
+    if (e.key === "Escape"&&deleteModal.style.display==='flex') {
+        deleteModal.style.display = "none";
+    }else if(e.key==='Escape'){
+        addModal.style.display = "none"; // Close modal when clicking outside
+        noteModal.style.display = "none"; // Close modal when clicking outside
     }
 })
