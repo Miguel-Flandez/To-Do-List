@@ -2,17 +2,19 @@
     box-sizing: border-box;
     overflow-x: hidden; 
 }
-
 h1{
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: 'Playwrite IN', sans-serif;
     font-weight: bold;
     font-size: 50px;
     min-width: 700px;
     text-align: center;
-    color: tan;
+    color: #66fcf1;
+    margin-top: 0;
+    text-decoration:underline;
 }
 body{
-    background-image: url("https://images.unsplash.com/photo-1558346648-9757f2fa4474?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+    
+    background-color: #0b0c10;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -27,21 +29,21 @@ body{
     text-align: center;
     display: flex;
     flex-direction: row;
+    border: 5px solid #66fcf1;
     flex-wrap: wrap;
     gap: 10px;
     overflow-y: auto;
-    border: 4px solid tan;
     border-radius: 50px;
     padding: 30px;
-    background-color: white;
+
 }
 
 #addList{
-    background-color: tan;
+    background-color: #66fcf1;
     color: white;
     font-weight: bold;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    border: 1px solid tan;
+    font-family: 'Smooch Sans', sans-serif;
+    border: 1px solid #45a29e;
     border-radius: 100%;
     position: fixed;
     width: 40px;
@@ -51,25 +53,26 @@ body{
 }
 
 #addList:hover{
-    color: tan;
+    color: #45a29e;
     background-color: white;
 }
 
 
 .to-do-lists{
     position: relative;
-    border: 1px solid tan;
+    border: 1px solid #45a29e;
     width: 90px;
     height: 160px;
     padding:20px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: tan;
+    font-family: 'Smooch Sans', sans-serif;
+    color: #66fcf1;
     font-weight: bold;
+    background-color: #1f2833;
 }
 
 .to-do-lists:hover{
     color:white;
-    background-color: tan;
+    background-color: #66fcf1;
     display: block;
 }
 
@@ -90,24 +93,24 @@ body{
     background-color: white;
     padding: 20px;
     border-radius: 20px;
-    border: 10px solid tan;
-    color: tan;
+    border: 10px solid #45a29e;
+    color: #45a29e;
 }
 
 #addModal input {
     width: 200px;
     padding: 10px;
     margin: 10px 0;
-    border: 1px solid tan;
-    color: tan;
+    border: 1px solid #45a29e;
+    color: #45a29e;
 
 }
 
 #addModal button {
     padding: 10px;
-    color: tan;
-    background-color: white;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: white;
+    background-color: #45a29e;
+    font-family: 'Roboto', sans-serif;
     border-radius: 10px;
     font-weight: bold;
 }
@@ -136,13 +139,13 @@ body{
     align-items: center;
 }
 #noteModalContent {
-    background-color: white;
+    background-color: #1f2833;
     height: 80%;
     width: 95%;
     padding: 0 20px;
     border-radius: 20px;
-    border: 10px solid tan;
-    color: tan;
+    border: 10px solid #45a29e;
+    color: #45a29e;
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -151,9 +154,9 @@ body{
     overflow-y: hidden;
 }
 #noteTitle{
-    color: tan;
+    color: #66fcf1;
     font-weight: bold;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: 50px;
     margin-top: -40px;
 }
@@ -179,19 +182,20 @@ body{
 #note{
     flex-grow: 1;
     height: 5%;
-    color: tan;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #45a29e;
+    font-family: 'Roboto', sans-serif;
     font-size: 20px;
     max-width: 95%;
-    border: 1px solid tan;
+    border: 1px solid #45a29e;
     border-top: transparent;
     border-right: transparent;
     border-left: transparent;
     position: relative;
+    background-color: #1f2833;
 }
 #deleteTodo{
     border: none;
-    background-color: white;
+    background-color: #1f2833;
     transition: transform 0.1s linear;
     flex-shrink: 0;
 }
@@ -206,8 +210,8 @@ body{
     overflow-y: hidden;
 }
 #buttonHolder button{
-    border: 2px solid tan;
-    background-color: tan;
+    border: 2px solid #45a29e;
+    background-color: #45a29e;
     border-radius: 5px;
     color: white;
     height: 30px;
@@ -217,7 +221,7 @@ body{
 }
 #buttonHolder button:hover{
     background-color: white;
-    color: tan;
+    color: #66fcf1;
 }
 
 #deleteModal {
@@ -235,18 +239,18 @@ body{
     background-color: white;
     padding: 20px;
     border-radius: 20px;
-    border: 10px solid tan;
-    color: tan;
+    border: 10px solid #45a29e;
+    color: #45a29e;
 }
 
 #deleteModalConfirmMessage{
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: 'Roboto', sans-serif;
 
 }
 
 #deleteModalContent button{
-    border: 2px solid tan;
-    background-color: tan;
+    border: 2px solid #45a29e;
+    background-color: #45a29e;
     border-radius: 5px;
     color: white;
     display: inline-block;
@@ -255,5 +259,5 @@ body{
 
 #deleteModalContent button:hover{
     background-color: white;
-    color: tan;
+    color: #45a29e;
 }
